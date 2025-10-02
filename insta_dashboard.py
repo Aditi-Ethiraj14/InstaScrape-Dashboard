@@ -26,7 +26,7 @@ with st.sidebar:
     for article in news_articles:
         st.markdown(f"[{article['title']}]({article['url']})")
         if article.get("urlToImage"):
-            st.image(article["urlToImage"], use_container_width=True)
+            st.image(article["urlToImage"], width="stretch")
 
 
 st.title("📊 InstaScrape Dashboard")
@@ -76,15 +76,12 @@ if st.button("Fetch Data"):
         if data:
             df = pd.DataFrame(data).sort_values(by="Followers", ascending=False).reset_index(drop=True)
 
-            
             df.index = df.index + 1
             df = df.head(len(usernames))
 
-            
             st.subheader("📈 Instagram Accounts Ranking")
             st.dataframe(df, width=1000, height=400)
 
-            
             st.subheader("📊 Followers Comparison Chart")
             fig, ax = plt.subplots(figsize=(12, 6))  # wider figure for labels
             ax.bar(df["Username"], df["Followers"], color="skyblue")

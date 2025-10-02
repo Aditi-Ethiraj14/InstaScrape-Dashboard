@@ -1,56 +1,69 @@
-📊 Instagram Profile Dashboard
+# 📊 InstaScrape Dashboard
 
-This is a Streamlit-based Instagram Profile Dashboard that fetches and displays Instagram profile metrics (followers, following, posts) for given usernames. It also shows a ranking chart and latest news in the sidebar.
+This project is a Instagram Dashboard built on Streamlit and InstaGPy that fetches and displays Instagram profile metrics — followers, following, posts — for given usernames.
+The app also generates a **followers comparison chart** and shows the **latest news headlines** in the sidebar via the News API.
 
-🛠 Features
+---
 
-Fetch Instagram profile details for one or more usernames.
+## 🎥 Getting Started Video
 
-Display follower count, following count, posts, and account name.
+You can watch a quick demo of the dashboard here:  
+📺 **[Instagram Dashboard Demo](https://youtu.be/your-demo-link)**
 
-Followers comparison chart (logarithmic scale).
+---
 
-Sidebar with latest news headlines.
+## 🛠 Features
 
-Fallback Instagram Session ID: If a session ID is not entered in the sidebar, the app uses a hardcoded session ID from the code.
+- Extract Profile Data: Username, full name, followers count, following count, and post counts.
+- Generate Rankings: Displays a table ranking the profiles based on followers.
+- Visualization: A logarithmic scale bar chart comparing followers across profiles.
+- Latest News Sidebar: Pulls the top 5 news articles from News API based on selected topics.
+- Multiple Account Analysis: Supports batch username input for multiple profiles providing quick analysis on a clean, interactive dashboard built with Streamlit.
 
-⚙️ Setup
-1. Clone this repository
-git clone https://github.com/your-repo/instagram-dashboard.git
-cd instagram-dashboard
+---
 
-2. Install dependencies
+## ⚙ Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-repo/instascrape-dashboard.git
+cd instascrape-dashboard
+```
+2. Install dependencies:
+```bash
+pip install instagpy
 pip install -r requirements.txt
+```
+3. Run the app:
+```bash
+streamlit run insta_dashboard.py
+```
+Enter session ID in the sidebar via cookies of Instagram
+Enter Instagram usernames separated by commas
+(example: nasa,isrosight,ecell_srmist)
 
-3. Install required packages manually if needed
-pip install streamlit pandas matplotlib instagpy requests
+---
 
-🧩 Usage
+## 📚 Dependencies
 
-Run the app:
+- **Python 3.x**
+- **Streamlit**
+- **Pandas**
+- **Matplotlib**
+- **InstaGPy** — Instagram scraping library
+- **Requests**
+- **BeautifulSoup4, lxml** — for HTML parsing and scraping
+- **certifi, emoji, PySocks, urllib3** — required by InstaGPy and requests
 
-streamlit run app.py
+---
 
-Enter Instagram usernames separated by commas (example: champagnepapi,nasa,9gag).
+## 💡 Notes
 
+- Instagram may block scraping if session IDs expire or too many requests are made.
+- You may need to update your session ID periodically to avoid errors.
 
-📚 Dependencies
+---
 
-Python 3.x
+Made with ❤️ by **Aditi Ethiraj**
 
-Streamlit
-
-Pandas
-
-Matplotlib
-
-InstaGPy
- (Instagram scraping library)
-
-Requests
-
-💡 Notes
-
-Instagram may block scraping if session IDs expire or if too many requests are made.
-
-You may need to update your session ID periodically.
+---

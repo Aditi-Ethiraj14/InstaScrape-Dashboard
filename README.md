@@ -8,7 +8,7 @@ The app also generates a **followers comparison chart** and shows the **latest n
 ## 🎥 Getting Started Video
 
 <img width="2511" height="1315" alt="image" src="https://github.com/user-attachments/assets/e75051a0-4339-4465-9ad0-80aa910b2932" />
-<img width="2077" height="1085" alt="image" src="https://github.com/user-attachments/assets/eb927f30-4651-4fa7-8fa4-53033111fef6" />
+<img width="2390" height="1213" alt="image" src="https://github.com/user-attachments/assets/cc5662ba-c77d-4f17-9152-285ff13a29e3" />
 
 You can watch a quick demo of the dashboard here(Use SRMIST mail id):  
 📺 **[InstaScrape Dashboard Demo](https://drive.google.com/file/d/1_w0gib8_HrJyLMuzY6CeyxK2xP0m3Cm3/view?usp=sharing)**

@@ -31,7 +31,7 @@ with st.sidebar:
 st.title("📊 InstaScrape Dashboard")
 st.markdown("Enter Instagram usernames (comma separated) and see follower rankings.")
 
-usernames_input = st.text_area("Enter Instagram usernames", value="champagnepapi,nasa,9gag")
+usernames_input = st.text_area("Enter Instagram usernames", value="nasa,isrosight,ecell_srmist")
 
 if st.button("Fetch Data"):
     if not SESSION_ID:

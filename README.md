@@ -5,8 +5,6 @@ The app also generates a **followers comparison chart** and shows the **latest n
 
 ---
 
----
-
 ## ✨ App Live On
 
 https://instascrape-dashboard.streamlit.app/

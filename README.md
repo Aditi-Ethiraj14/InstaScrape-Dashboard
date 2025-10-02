@@ -49,7 +49,7 @@ pip install -r requirements.txt
 ```bash
 streamlit run insta_dashboard.py
 ```
-Enter session ID in the sidebar via cookies of Instagram
+Enter session ID in the sidebar via cookies of Instagram (if not works via hardcode)
 Enter Instagram usernames separated by commas
 (example: nasa,isrosight,ecell_srmist)
 

@@ -5,7 +5,15 @@ The app also generates a **followers comparison chart** and shows the **latest n
 
 ---
 
-## 🎥 Getting Started Video
+---
+
+## ✨ App Live On
+
+https://instascrape-dashboard.streamlit.app/
+
+---
+
+## 🎥 Getting Started
 
 <img width="2511" height="1315" alt="image" src="https://github.com/user-attachments/assets/e75051a0-4339-4465-9ad0-80aa910b2932" />
 <img width="2390" height="1213" alt="image" src="https://github.com/user-attachments/assets/cc5662ba-c77d-4f17-9152-285ff13a29e3" />

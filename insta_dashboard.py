@@ -28,64 +28,76 @@ with st.sidebar:
         if article.get("urlToImage"):
             st.image(article["urlToImage"], use_container_width=True)
 
+
 st.title("📊 InstaScrape Dashboard")
 st.markdown("Enter Instagram usernames (comma separated) and see follower rankings.")
 
-usernames_input = st.text_area("Enter Instagram usernames", value="nasa,isrosight,ecell_srmist")
+usernames_input = st.text_area(
+    "Enter Instagram usernames",
+    value="nasa,isrosight,ecell_srmist,srmuniversityofficial,ecell_srmuap,iitbombay_ecell,srmdei.official,srmschoolofcomputing,startup.pedia,srmist_dsa"
+)
+
+HARDCODED_SESSION_ID = "YOUR_HARDCODED_SESSION_ID_HERE"
 
 if st.button("Fetch Data"):
     if not SESSION_ID:
-        st.error("⚠ Please enter a valid Instagram Session ID in the sidebar.")
+        SESSION_ID = HARDCODED_SESSION_ID  
+
+    insta = InstaGPy(
+        use_mutiple_account=False,
+        session_ids=[SESSION_ID]
+    )
+
+    usernames = [u.strip() for u in usernames_input.split(",") if u.strip()]
+    if not usernames:
+        st.warning("⚠ Please enter at least one username.")
     else:
-        insta = InstaGPy(
-            use_mutiple_account=False,
-            session_ids=[SESSION_ID]
-        )
+        data = []
+        errors = []
+        with st.spinner("Fetching data..."):
+            for username in usernames:
+                try:
+                    details = insta.get_user_basic_details(username, pretty_print=False)
+                    data.append({
+                        "Username": details["username"],
+                        "Full Name": details["full_name"],
+                        "Followers": details["follower_count"],
+                        "Following": details["following_count"],
+                        "Posts": details["media_count"]
+                    })
+                except Exception as e:
+                    errors.append(f"Error fetching {username}: {e}")
 
-        usernames = [u.strip() for u in usernames_input.split(",") if u.strip()]
-        if not usernames:
-            st.warning("⚠ Please enter at least one username.")
-        else:
-            data = []
-            errors = []
-            with st.spinner("Fetching data..."):
-                for username in usernames:
-                    try:
-                        details = insta.get_user_basic_details(username, pretty_print=False)
-                        data.append({
-                            "Username": details["username"],
-                            "Full Name": details["full_name"],
-                            "Followers": details["follower_count"],
-                            "Following": details["following_count"],
-                            "Posts": details["media_count"]
-                        })
-                    except Exception as e:
-                        errors.append(f"Error fetching {username}: {e}")
+        if errors:
+            st.error("⚠ Some errors occurred:")
+            for err in errors:
+                st.write(err)
 
-            if errors:
-                st.error("⚠ Some errors occurred:")
-                for err in errors:
-                    st.write(err)
+        if data:
+            df = pd.DataFrame(data).sort_values(by="Followers", ascending=False).reset_index(drop=True)
 
-            if data:
-                df = pd.DataFrame(data).sort_values(by="Followers", ascending=False).reset_index(drop=True)
+            
+            df.index = df.index + 1
+            df = df.head(len(usernames))
 
-                # Show Table
-                st.subheader("📈 Instagram Accounts Ranking")
-                st.table(df)
+            
+            st.subheader("📈 Instagram Accounts Ranking")
+            st.dataframe(df, width=1000, height=400)
 
-                # Followers Comparison Chart (Log Scale)
-                st.subheader("📊 Followers Comparison Chart (Log Scale)")
-                fig, ax = plt.subplots(figsize=(8, 4))
-                ax.bar(df["Username"], df["Followers"], color="skyblue")
-                ax.set_yscale("log")
-                ax.set_ylabel("Followers (Log Scale)")
-                ax.set_xlabel("Username")
-                ax.set_title("Instagram Followers Comparison (Log Scale)")
-                for i, v in enumerate(df["Followers"]):
-                    ax.text(i, v, f"{v:,}", ha="center", va="bottom", fontsize=8)
-                st.pyplot(fig)
-
+            
+            st.subheader("📊 Followers Comparison Chart")
+            fig, ax = plt.subplots(figsize=(12, 6))  # wider figure for labels
+            ax.bar(df["Username"], df["Followers"], color="skyblue")
+            ax.set_yscale("log")
+            ax.set_ylabel("Followers")
+            ax.set_xlabel("Username")
+            ax.set_title("Instagram Followers Comparison")
+            ax.set_xticks(range(len(df["Username"])))
+            ax.set_xticklabels(df["Username"], rotation=45, ha="right", fontsize=9)
+            for i, v in enumerate(df["Followers"]):
+                ax.text(i, v, f"{v:,}", ha="center", va="bottom", fontsize=8)
+            plt.tight_layout()
+            st.pyplot(fig)
 
 st.markdown("""
 ---

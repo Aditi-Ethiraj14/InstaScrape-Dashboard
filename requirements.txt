@@ -6,3 +6,5 @@ lxml
 PySocks
 requests
 urllib3
+matplotlib
+instagpy
